@@ -5,3 +5,8 @@
 .hiddenRadio{
   display: none;
 }
+
+.hiddenBlank{
+  color: white;
+  border: none;
+}

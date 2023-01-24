@@ -16,7 +16,7 @@
   </div>
   <div class="row">
       <div class="col-sm-6 offset-3">
-          <table class="table table-bordered table-striped table-responsive">
+          <table class="table table-bordered table-responsive">
               <thead>
                   <tr>
                       <th scope="col">Criterio</th>
@@ -30,7 +30,7 @@
 
                       <tr [ngClass]="validateTitle(question.criterio)" *ngFor="let question of questions; let i = index">
 
-                          <td [attr.colspan]="validateColspan(question.criterio)" >{{question.criterio}}</td>
+                          <td [ngClass]="verifyBlankClass(question.criterio)" [attr.colspan]="validateColspan(question.criterio)">{{question.criterio}}</td>
                           <td [ngClass]="validateRadio(question.criterio)" [attr.colspan]="validateTotal(question.criterio)">
                             <input type="radio" name="{{i}}" id="{{i}}SI">
                           </td>

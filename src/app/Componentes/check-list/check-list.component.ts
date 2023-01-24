@@ -19,7 +19,10 @@ export class CheckListComponent {
         const sheets = wb.SheetNames;
 
         if (sheets.length) {
-          const rows = XLSX.utils.sheet_to_json(wb.Sheets[sheets[0]]);
+          const rows = XLSX.utils.sheet_to_json(wb.Sheets[sheets[0]], {
+            blankrows: true,
+            defval: 'blank',
+          });
           this.questions = rows;
         }
         console.log(this.questions);
@@ -33,6 +36,20 @@ export class CheckListComponent {
       return true;
     } else {
       return false;
+    }
+  }
+
+  verifyBlank(word: string) {
+    if (word.includes('blank')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  verifyBlankClass(word: string) {
+    if (word.includes('blank')) {
+      return 'hiddenBlank';
     }
   }
 
@@ -57,7 +74,11 @@ export class CheckListComponent {
   }
 
   validateRadio(word: string) {
-    if (this.verifyIncludes(word) || word.includes('Total')) {
+    if (
+      this.verifyIncludes(word) ||
+      word.includes('Total') ||
+      this.verifyBlank(word)
+    ) {
       return 'hiddenRadio';
     }
   }
