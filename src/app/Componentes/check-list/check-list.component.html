@@ -1,0 +1,54 @@
+<main>
+  <div class="row mb-2 mt-5">
+      <div class="col-sm-6 offset-3">
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="input-group">
+                      <div class="custom-file">
+                          <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required (change)="handleImport($event)"
+                              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-6 offset-3">
+          <table class="table table-bordered table-striped table-responsive">
+              <thead>
+                  <tr>
+                      <th scope="col">Criterio</th>
+                      <th scope="col">SI</th>
+                      <th scope="col">NO</th>
+                      <th scope="col">N/A</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <ng-container *ngIf="questions.length; else elseBlock; ">
+
+                      <tr [ngClass]="validateTitle(question.criterio)" *ngFor="let question of questions; let i = index">
+
+                          <td [attr.colspan]="validateColspan(question.criterio)" >{{question.criterio}}</td>
+                          <td [ngClass]="validateRadio(question.criterio)" [attr.colspan]="validateTotal(question.criterio)">
+                            <input type="radio" name="{{i}}" id="{{i}}SI">
+                          </td>
+                          <td [ngClass]="validateRadio(question.criterio)">
+                            <input type="radio" name="{{i}}" id="{{i}}NO">
+                          </td>
+                          <td [ngClass]="validateRadio(question.criterio)">
+                            <input type="radio" name="{{i}}" id="{{i}}NA">
+                          </td>
+                      </tr>
+                  </ng-container>
+                  <ng-template #elseBlock>
+                      <tr>
+                          <td colspan="5" class="text-center">No hay datos para mostrar</td>
+                      </tr>
+                  </ng-template>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</main>

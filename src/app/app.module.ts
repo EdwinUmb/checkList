@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CheckListComponent } from './Componentes/check-list/check-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CheckListComponent
   ],
   imports: [
     BrowserModule,
