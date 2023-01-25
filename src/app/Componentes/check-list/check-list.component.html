@@ -15,29 +15,31 @@
       </div>
   </div>
   <div class="row">
-      <div class="col-sm-6 offset-3">
-          <table class="table table-bordered table-responsive">
+      <div class="col-md-8 offset-2">
+          <table class="table table-bordered table-responsive" >
               <thead>
                   <tr>
-                      <th scope="col">Criterio</th>
-                      <th scope="col">SI</th>
-                      <th scope="col">NO</th>
-                      <th scope="col">N/A</th>
+                      <th style="text-align: center;" scope="col">Criterio</th>
+                      <th >pesos</th>
+                      <th style="text-align: center;" scope="col">SI</th>
+                      <th style="text-align: center;" scope="col">NO</th>
+                      <th style="text-align: center;" scope="col">N/A</th>
                   </tr>
               </thead>
               <tbody>
                   <ng-container *ngIf="questions.length; else elseBlock; ">
 
-                      <tr [ngClass]="validateTitle(question.criterio)" *ngFor="let question of questions; let i = index">
+                      <tr [ngClass]="validateTitle(question.criterio)" *ngFor="let question of questions; let i = index" (change)="event($event, question)" (change)="onChange(element)">
 
                           <td [ngClass]="verifyBlankClass(question.criterio)" [attr.colspan]="validateColspan(question.criterio)">{{question.criterio}}</td>
-                          <td [ngClass]="validateRadio(question.criterio)" [attr.colspan]="validateTotal(question.criterio)">
+                          <td >{{question.pesos}}</td>
+                          <td style="text-align: center;" [ngClass]="validateRadio(question.criterio)">
                             <input type="radio" name="{{i}}" id="{{i}}SI">
                           </td>
-                          <td [ngClass]="validateRadio(question.criterio)">
+                          <td style="text-align: center;" [ngClass]="validateRadio(question.criterio)">
                             <input type="radio" name="{{i}}" id="{{i}}NO">
                           </td>
-                          <td [ngClass]="validateRadio(question.criterio)">
+                          <td style="text-align: center;" [ngClass]="validateRadio(question.criterio)">
                             <input type="radio" name="{{i}}" id="{{i}}NA">
                           </td>
                       </tr>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -8,6 +8,14 @@ import * as XLSX from 'xlsx';
 })
 export class CheckListComponent {
   questions: any[] = [];
+  mostImportant: number = 0;
+  totalNa: number = 0;
+  totalSi: number = 0;
+  idNa: string = 'NA';
+  idSi: string = 'SI';
+
+  arrNa: any[] = [];
+  arrSi: any[] = [];
 
   handleImport($event: any) {
     const files = $event.target.files;
@@ -20,15 +28,50 @@ export class CheckListComponent {
 
         if (sheets.length) {
           const rows = XLSX.utils.sheet_to_json(wb.Sheets[sheets[0]], {
+            raw: true,
             blankrows: true,
-            defval: 'blank',
+            defval: '',
           });
           this.questions = rows;
         }
-        console.log(this.questions);
+        //console.log(this.questions);
+        this.validateMostImportant(this.questions);
       };
       reader.readAsArrayBuffer(file);
     }
+  }
+
+  validateMostImportant(arr: any[]) {
+    arr.forEach((element) => {
+      if (element.pesos != null && !element.criterio.includes('Total')) {
+        if (element.pesos > this.mostImportant) {
+          this.mostImportant = element.pesos;
+        }
+      }
+    });
+    console.log(this.mostImportant);
+  }
+
+  event(event, question) {
+    console.log(event.target.id);
+
+    if (event.target.id.includes('NA')) {
+      console.log('contiene na', question);
+      this.arrNa.push({
+        id: event.target.id,
+        description: question,
+      });
+    } else if (event.target.id.includes('SI')) {
+      console.log('radio si', question);
+      this.arrSi.push({
+        id: event.target.id,
+        description: question,
+      });
+      this.arrSi.forEach((element) => {});
+    }
+    console.log('this is arrNA', this.arrNa);
+    console.log('this is arrSI', this.arrSi);
+    console.log('this is totalSI', this.totalSi);
   }
 
   verifyIncludes(word: string) {
@@ -39,8 +82,12 @@ export class CheckListComponent {
     }
   }
 
+  onChange(row) {
+    console.log(row);
+  }
+
   verifyBlank(word: string) {
-    if (word.includes('blank')) {
+    if (word === '') {
       return true;
     } else {
       return false;
@@ -48,7 +95,7 @@ export class CheckListComponent {
   }
 
   verifyBlankClass(word: string) {
-    if (word.includes('blank')) {
+    if (this.verifyBlank(word)) {
       return 'hiddenBlank';
     }
   }
@@ -56,14 +103,6 @@ export class CheckListComponent {
   validateTitle(word: string) {
     if (this.verifyIncludes(word)) {
       return 'title';
-    }
-  }
-
-  validateTotal(word: string) {
-    if (word.includes('Total')) {
-      console.log(3);
-
-      return 3;
     }
   }
 

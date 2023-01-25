@@ -7,6 +7,8 @@
 }
 
 .hiddenBlank{
-  color: white;
+  color: transparent;
+  text-indent: 100%;
+  font-size: 0;
   border: none;
 }
