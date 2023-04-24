@@ -1,0 +1,13 @@
+
+<p>
+  name from parent : {{childProperty.name}}
+</p>
+<p>
+  last name from parent : {{childProperty.lastName}}
+</p>
+
+<label>input en first child</label>
+<input #message type="text">
+<button (click)="returnDataToParentFromChild(message.value)">
+  returnDataFromChildToParent
+</button>

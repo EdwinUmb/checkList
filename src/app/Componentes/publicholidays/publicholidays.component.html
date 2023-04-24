@@ -1,0 +1,10 @@
+<button (click)="getHolidays()">GetHolidays</button>
+
+<div *ngFor="let holiday of resHoliday">
+    {{holiday.date}}
+    <br>
+    {{holiday.localName}}
+</div>
+
+<br>
+<app-form></app-form>

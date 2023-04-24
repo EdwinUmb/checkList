@@ -1,0 +1,41 @@
+<div style="display: flex;">
+  <div class="card">
+
+      <input class="alignRadio" type="radio" name="pricing" id="card1">
+
+      <label for="card1">
+        <h5>BASIC</h5>
+        <h2>
+            15
+            <span>/month</span>
+        </h2>
+    </label>
+
+  </div>
+  <div class="card">
+    <input class="alignRadio" type="radio" name="pricing" id="card2" checked>
+    <label for="card2">
+        <h5>STANDARD</h5>
+        <h2>
+            35
+            <span>/month</span>
+        </h2>
+    </label>
+  </div>
+  <div class="card">
+    <input class="alignRadio" type="radio" name="pricing" id="card3">
+    <label for="card3">
+        <h5>PREMIUM</h5>
+        <h2>
+            120
+            <span>/month</span>
+        </h2>
+    </label>
+  </div>
+
+</div>
+
+<div style="display: flex; justify-content: center;">
+  <span>{{cantidad}}</span>
+  <input style="width: 90%;" type="range" #range name="range" id="range" [max]="maxRange" [min]="minRange" [step]="step" (input)="setQuantity(range.value)" (change)="hola()">
+</div>
